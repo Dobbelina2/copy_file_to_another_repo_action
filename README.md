@@ -2,9 +2,13 @@
 This GitHub Action copies files or folders from the current repository to a location in another repository
  ```diff
  + Improved version from @dmnemec with:
- + delete_existing: [optional] Delete all the existing files in the destination_folder before copying over the new files.
- + Multiple source files/directories separated by space "file1.txt file2.txt"
- + Use ${{ github.event.head_commit.message }} to preserve the original commit message.
+ + delete_existing: [optional] Delete all the existing 
+ + files in the destination_folder before copying over
+ + the new files.
+ + Multiple source files/directories separated by space
+ + "file1.txt file2.txt"
+ + Use ${{ github.event.head_commit.message }} to 
+ + preserve the original commit message.
  ```
 # Example Workflow
     name: Push File
