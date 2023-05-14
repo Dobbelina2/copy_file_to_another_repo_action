@@ -2,7 +2,7 @@
 This GitHub Action copies files or folders from the current repository to a location in another repository
  ```diff
  + Improved version from @dmnemec with:
- + delete_existing: [optional] Delete all the existing 
+ + delete_existing: true [optional] Delete all the existing 
  + files in the destination_folder before copying over
  + the new files.
  + Multiple source files/directories separated by space
@@ -48,7 +48,7 @@ The `API_TOKEN_GITHUB` needs to be set in the `Secrets` section of your reposito
 * destination_branch_create: [optional] A branch to be created with this commit, defaults to commiting in `destination_branch`
 * commit_message: [optional] A custom commit message for the commit. Defaults to `Update from https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}` 
  use `${{ github.event.head_commit.message }}` to preserve the original commit message.
-* delete_existing: [optional] Delete all the existing files in the `destination_folder` before copying over the new files.
+* delete_existing: true [optional] Delete all the existing files in the `destination_folder` before copying over the new files.
 
 # Behavior Notes
 The action will create any destination paths if they don't exist. It will also overwrite existing files if they already exist in the locations being copied to. It will not delete the entire destination repository.
