@@ -4,7 +4,7 @@ set -e
 set -x
 
 if [ -z "$INPUT_SOURCE_FILE" ]; then
-  echo "Source file must be defined"
+  echo "Source file(s) must be defined"
   return 1
 fi
 
@@ -37,11 +37,17 @@ if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
   rm -rf $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 fi
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
-if [ -d "$INPUT_SOURCE_FILE" ]; then
-  cp -R "$INPUT_SOURCE_FILE"/* "$DEST_COPY"
-else
-  cp -R "$INPUT_SOURCE_FILE" "$DEST_COPY"
-fi
+
+# split comma-separated list into array
+IFS=',' read -ra SOURCE_FILES <<< "$INPUT_SOURCE_FILE"
+for SOURCE_FILE in "${SOURCE_FILES[@]}"
+do
+  if [ -d "$SOURCE_FILE" ]; then
+    cp -R "$SOURCE_FILE"/* "$DEST_COPY"
+  else
+    cp -R "$SOURCE_FILE" "$DEST_COPY"
+  fi
+done
 
 cd "$CLONE_DIR"
 
