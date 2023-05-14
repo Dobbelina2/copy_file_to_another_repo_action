@@ -41,7 +41,7 @@ mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 # split comma-separated list into array
 SOURCE_FILES=$(echo "$INPUT_SOURCE_FILE" | tr ',' ' ')
 IFS=' ' read -ra SOURCE_FILES_ARRAY <<< "$SOURCE_FILES"
-for SOURCE_FILE in "${SOURCE_FILES[@]}"
+for SOURCE_FILE in "${SOURCE_FILES_ARRAY[@]}"
 do
   if [ -d "$SOURCE_FILE" ]; then
     cp -R "$SOURCE_FILE"/* "$DEST_COPY"
