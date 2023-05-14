@@ -1,7 +1,6 @@
-header-includes: \usepackage{xcolor}
 # copy_file_to_another_repo_action
 This GitHub Action copies files or folders from the current repository to a location in another repository
-\textcolor{green}{Text is green!}
+
 # Example Workflow
     name: Push File
 
