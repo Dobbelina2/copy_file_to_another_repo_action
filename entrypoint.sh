@@ -40,9 +40,7 @@ mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 
 # create array from source files
 SOURCE_FILES="$INPUT_SOURCE_FILE"
-IFS=',' read -r -a SOURCE_FILES_ARRAY <<< "$SOURCE_FILES"
-for SOURCE_FILE in "${SOURCE_FILES_ARRAY[@]}"
-do
+echo "$SOURCE_FILES" | tr ' ' '\n' | while read -r SOURCE_FILE; do
   if [ -d "$SOURCE_FILE" ]; then
     cp -R "$SOURCE_FILE"/* "$DEST_COPY"
   else
