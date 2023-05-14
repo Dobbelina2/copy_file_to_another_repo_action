@@ -38,9 +38,9 @@ if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
 fi
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 
-# split space-separated list into array
-SOURCE_FILES=$(echo "$INPUT_SOURCE_FILE" | tr ',' ' ')
-SOURCE_FILES_ARRAY=(${SOURCE_FILES// / })
+# create array from source files
+SOURCE_FILES="$INPUT_SOURCE_FILE"
+SOURCE_FILES_ARRAY=($SOURCE_FILES)
 for SOURCE_FILE in "${SOURCE_FILES_ARRAY[@]}"
 do
   if [ -d "$SOURCE_FILE" ]; then
