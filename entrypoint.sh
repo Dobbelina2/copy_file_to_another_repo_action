@@ -40,7 +40,7 @@ mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 
 # create array from source files
 SOURCE_FILES="$INPUT_SOURCE_FILE"
-SOURCE_FILES_ARRAY=($SOURCE_FILES)
+IFS=',' read -ra SOURCE_FILES_ARRAY <<< "$SOURCE_FILES"
 for SOURCE_FILE in "${SOURCE_FILES_ARRAY[@]}"
 do
   if [ -d "$SOURCE_FILE" ]; then
