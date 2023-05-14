@@ -32,7 +32,7 @@ This GitHub Action copies files or folders from the current repository to a loca
             destination_folder: 'test-dir'
             user_email: 'example@email.com'
             user_name: 'dmnemec'
-            commit_message: 'A custom message for the commit'
+            commit_message: ${{ github.event.head_commit.message }}
             delete_existing: true
 
 # Variables
