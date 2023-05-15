@@ -11,6 +11,7 @@ This GitHub Action copies files or folders from the current repository to a loca
  + preserve the original commit message.
  ```
 # Example Workflow
+```yml
     name: Push File
 
     on: push
@@ -34,7 +35,7 @@ This GitHub Action copies files or folders from the current repository to a loca
             user_name: 'dmnemec'
             commit_message: ${{ github.event.head_commit.message }}
             delete_existing: true
-
+```
 # Variables
 
 The `API_TOKEN_GITHUB` needs to be set in the `Secrets` section of your repository options. You can retrieve the `API_TOKEN_GITHUB` [here](https://github.com/settings/tokens) (set the `repo` permissions).
