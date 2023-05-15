@@ -12,30 +12,30 @@ This GitHub Action copies files or folders from the current repository to a loca
  ```
 # Example Workflow
 ```yml
-    name: Push File
+name: Push File
 
-    on: push
+on: push
 
-    jobs:
-      copy-file:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Checkout
-          uses: actions/checkout@v3
+jobs:
+  copy-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-        - name: Pushes test file
-          uses: dobbelina/copy_file_to_another_repo_action@main
-          env:
-            API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-          with:
-            source_file: 'test2.md'
-            destination_repo: 'dmnemec/release-test'
-            destination_folder: 'test-dir'
-            user_email: 'example@email.com'
-            user_name: 'dmnemec'
-            commit_message: ${{ github.event.head_commit.message }}
-            delete_existing: true
-```
+      - name: Pushes test file
+        uses: dobbelina/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: "test2.md"
+          destination_repo: "dmnemec/release-test"
+          destination_folder: "test-dir"
+          user_email: "example@email.com"
+          user_name: "dmnemec"
+          commit_message: ${{ github.event.head_commit.message }}
+          delete_existing: true
+ ```
 # Variables
 
 The `API_TOKEN_GITHUB` needs to be set in the `Secrets` section of your repository options. You can retrieve the `API_TOKEN_GITHUB` [here](https://github.com/settings/tokens) (set the `repo` permissions).
