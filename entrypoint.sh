@@ -38,7 +38,7 @@ if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
 fi
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 
-# create array from source files
+# while loop for multiple source files
 SOURCE_FILES="$INPUT_SOURCE_FILE"
 echo "$SOURCE_FILES" | tr ' ' '\n' | while read -r SOURCE_FILE; do
   if [ -d "$SOURCE_FILE" ]; then
