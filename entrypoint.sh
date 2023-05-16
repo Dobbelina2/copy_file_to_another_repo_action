@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 set -x
@@ -38,10 +38,9 @@ if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
 fi
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 
-# Split space-separated list into array from source file(s)
-IFS=' ' read -ra SOURCE_FILES <<< "$INPUT_SOURCE_FILE"
-for SOURCE_FILE in "${SOURCE_FILES[@]}"
-do
+# while loop for multiple source files
+SOURCE_FILES="$INPUT_SOURCE_FILE"
+echo "$SOURCE_FILES" | tr ' ' '\n' | while read -r SOURCE_FILE; do
   if [ -d "$SOURCE_FILE" ]; then
     cp -R "$SOURCE_FILE"/* "$DEST_COPY"
   else
