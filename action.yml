@@ -16,6 +16,9 @@ inputs:
   user_name:
     description: 'GitHub username for the commit'
     required: true
+  use_rsync:
+    description: 'Copy files/directories using rsync instead of cp. Experimental feature, please know your use case'
+    required: false    
   destination_branch:
     description: 'branch to push file to, defaults to main'
     required: false
