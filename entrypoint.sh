@@ -34,17 +34,22 @@ fi
 echo "Copying contents to git repo"
 if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
   echo "Deleting existing files"
-  rm -rf $CLONE_DIR/$INPUT_DESTINATION_FOLDER
+  rm -rf "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 fi
-mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
+mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 
-# while loop for multiple source files
-SOURCE_FILES="$INPUT_SOURCE_FILE"
-echo "$SOURCE_FILES" | tr ' ' '\n' | while read -r SOURCE_FILE; do
+if [ "$INPUT_USE_RSYNC" = "true" ]; then
+  COPY_COMMAND="rsync -avrh"
+else
+  COPY_COMMAND="cp -R"
+fi
+
+IFS=','
+for SOURCE_FILE in $INPUT_SOURCE_FILE; do
   if [ -d "$SOURCE_FILE" ]; then
-    cp -R "$SOURCE_FILE"/* "$DEST_COPY"
+    find "$SOURCE_FILE" -type f -exec $COPY_COMMAND {} "$DEST_COPY" \;
   else
-    cp -R "$SOURCE_FILE" "$DEST_COPY"
+    $COPY_COMMAND "$SOURCE_FILE" "$DEST_COPY"
   fi
 done
 
