@@ -55,7 +55,9 @@ for SOURCE_FILE in $INPUT_SOURCE_FILE; do
   fi
 done
 
-
+if [ -n "$DEST_COPY" ]; then
+  cd "$DEST_COPY"
+fi
 
 
 cd "$CLONE_DIR"
