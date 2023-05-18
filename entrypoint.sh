@@ -56,9 +56,11 @@ for SOURCE_FILE in $INPUT_SOURCE_FILE; do
 done
 
 cd "$CLONE_DIR"
+ls -la
 
 if [ -n "$DEST_COPY" ]; then
   cd "$DEST_COPY"
+  ls -la
 fi
 
 if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
