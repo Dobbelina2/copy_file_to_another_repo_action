@@ -39,17 +39,17 @@ fi
 mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 
 if [ "$INPUT_USE_RSYNC" = "true" ]; then
-  COPY_COMMAND="rsync -avrh"
+  COPY_COMMAND=(rsync -avrh)
 else
-  COPY_COMMAND="cp -R"
+  COPY_COMMAND=(cp -R)
 fi
 
 IFS=','
 for SOURCE_FILE in $INPUT_SOURCE_FILE; do
   if [ -d "$SOURCE_FILE" ]; then
-    find "$SOURCE_FILE" -type f -exec $COPY_COMMAND {} "$DEST_COPY" \;
+    find "$SOURCE_FILE" -type f -exec "${COPY_COMMAND[@]}" {} "$DEST_COPY" \;
   else
-    $COPY_COMMAND "$SOURCE_FILE" "$DEST_COPY"
+    "${COPY_COMMAND[@]}" "$SOURCE_FILE" "$DEST_COPY"
   fi
 done
 
