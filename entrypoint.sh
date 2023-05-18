@@ -47,11 +47,12 @@ fi
 IFS=','
 for SOURCE_FILE in $INPUT_SOURCE_FILE; do
   if [ -d "$SOURCE_FILE" ]; then
-    find "$SOURCE_FILE" -type f -exec sh -c "$COPY_COMMAND {} \"$DEST_COPY\"" \;
+    find "$SOURCE_FILE" -type f -exec sh -c "$COPY_COMMAND \"{}\" \"$DEST_COPY\"" \;
   else
     sh -c "$COPY_COMMAND \"$SOURCE_FILE\" \"$DEST_COPY\""
   fi
 done
+
 
 
 cd "$CLONE_DIR"
