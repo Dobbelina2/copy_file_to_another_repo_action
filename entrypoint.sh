@@ -55,12 +55,11 @@ for SOURCE_FILE in $INPUT_SOURCE_FILE; do
   fi
 done
 
+cd "$CLONE_DIR"
+
 if [ -n "$DEST_COPY" ]; then
   cd "$DEST_COPY"
 fi
-
-
-cd "$CLONE_DIR"
 
 if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
   echo "Creating new branch: ${INPUT_DESTINATION_BRANCH_CREATE}"
