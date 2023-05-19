@@ -46,11 +46,9 @@ fi
 IFS=','
 for SOURCE_FILE in $INPUT_SOURCE_FILE; do
   if [ -d "$SOURCE_FILE" ]; then
-    find "$SOURCE_FILE" -type d -exec sh -c "mkdir -p \"$DEST_COPY/{}\"" \;
-    find "$SOURCE_FILE" -type f -exec sh -c "$COPY_COMMAND \"{}\" \"$DEST_COPY/{}\"" \;
+    cp -R "$SOURCE_FILE"/* "$DEST_COPY"
   else
-    FILENAME=$(basename "$SOURCE_FILE")
-    sh -c "$COPY_COMMAND \"$SOURCE_FILE\" \"$DEST_COPY/$FILENAME\""
+   cp -R "$SOURCE_FILE" "$DEST_COPY"
   fi
 done
 
