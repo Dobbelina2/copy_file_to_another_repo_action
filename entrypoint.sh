@@ -24,19 +24,14 @@ git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
 git clone --single-branch --branch $INPUT_DESTINATION_BRANCH "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
-if [ -z "$INPUT_DESTINATION_FOLDER" ]; then
-  DEST_COPY="$CLONE_DIR"
-else
-  DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
-fi
+DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 
 echo "Copying contents to git repo"
 if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
   echo "Deleting existing files"
-  rm -rf "$DEST_COPY"
+  rm -rf "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 fi
-
-mkdir -p "$DEST_COPY"
+mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 
 if [ "$INPUT_USE_RSYNC" = "true" ]; then
   COPY_COMMAND="rsync -avrh"
@@ -47,12 +42,16 @@ fi
 IFS=','
 for SOURCE_FILE in $INPUT_SOURCE_FILE; do
   if [ -d "$SOURCE_FILE" ]; then
-    find "$SOURCE_FILE" -type f -exec sh -c "$COPY_COMMAND {} \"$DEST_COPY/\"" \;
+    find "$SOURCE_FILE" -type d -exec sh -c "mkdir -p \"$DEST_COPY/{}\"" \;
+    find "$SOURCE_FILE" -type f -exec sh -c "$COPY_COMMAND \"{}\" \"$DEST_COPY/{}\"" \;
   else
     FILENAME=$(basename "$SOURCE_FILE")
     sh -c "$COPY_COMMAND \"$SOURCE_FILE\" \"$DEST_COPY/$FILENAME\""
   fi
 done
+
+
+
 
 cd "$CLONE_DIR"
 
@@ -67,8 +66,6 @@ if [ -z "$INPUT_COMMIT_MESSAGE" ]; then
 fi
 
 echo "Adding git commit"
-cd "$DEST_COPY"  # Move to the destination directory within the cloned repository
-git init  # Initialize a new git repository if it doesn't exist
 git add .
 if git status | grep -q "Changes to be committed"; then
   git commit --message "$INPUT_COMMIT_MESSAGE"
@@ -77,5 +74,3 @@ if git status | grep -q "Changes to be committed"; then
 else
   echo "No changes detected"
 fi
-
-
