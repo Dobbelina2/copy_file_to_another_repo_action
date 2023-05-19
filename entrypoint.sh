@@ -1,3 +1,4 @@
+
 #!/bin/sh
 
 set -e
@@ -50,11 +51,11 @@ fi
 IFS=','
 for SOURCE_FILE in $INPUT_SOURCE_FILE; do
   if [ -d "$SOURCE_FILE" ]; then
-    find "$SOURCE_FILE" -type d -exec sh -c "mkdir -p \"$DEST_COPY/{}\"" \;
-    find "$SOURCE_FILE" -type f -exec sh -c "cd \"$PWD\"; $COPY_COMMAND \"$PWD/{}\" \"$DEST_COPY/{}\"" \;
+    BASENAME=$(basename "$SOURCE_FILE")
+    sh -c "cd \"$DEST_COPY\"; mkdir -p \"$BASENAME\"; $COPY_COMMAND \"$SOURCE_FILE\" \"$BASENAME\""
   else
     FILENAME=$(basename "$SOURCE_FILE")
-    sh -c "cd \"$PWD\"; $COPY_COMMAND \"$PWD/$SOURCE_FILE\" \"$DEST_COPY/$FILENAME\""
+    sh -c "cd \"$DEST_COPY\"; $COPY_COMMAND \"$SOURCE_FILE\" \"$FILENAME\""
   fi
 done
 
@@ -85,3 +86,4 @@ if git status | grep -q "Changes to be committed"; then
 else
   echo "No changes detected"
 fi
+
