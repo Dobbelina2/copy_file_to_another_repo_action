@@ -13,7 +13,7 @@ if [ -z "$INPUT_GIT_SERVER" ]; then
 fi
 
 if [ -z "$INPUT_DESTINATION_BRANCH" ]; then
-  INPUT_DESTINATION_BRANCH=main
+  INPUT_DESTINATION_BRANCH="main"
 fi
 OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH"
 
@@ -22,16 +22,20 @@ CLONE_DIR=$(mktemp -d)
 echo "Cloning destination git repository"
 git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
-git clone --single-branch --branch $INPUT_DESTINATION_BRANCH "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
+git clone --single-branch --branch "$INPUT_DESTINATION_BRANCH" "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
-DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
+if [ -z "$INPUT_DESTINATION_FOLDER" ]; then
+  DEST_COPY="$CLONE_DIR"
+else
+  DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
+fi
 
 echo "Copying contents to git repo"
 if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
   echo "Deleting existing files"
-  rm -rf "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
+  rm -rf "$DEST_COPY"
 fi
-mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
+mkdir -p "$DEST_COPY"
 
 if [ "$INPUT_USE_RSYNC" = "true" ]; then
   COPY_COMMAND="rsync -avrh"
@@ -49,9 +53,6 @@ for SOURCE_FILE in $INPUT_SOURCE_FILE; do
     sh -c "$COPY_COMMAND \"$SOURCE_FILE\" \"$DEST_COPY/$FILENAME\""
   fi
 done
-
-
-
 
 cd "$CLONE_DIR"
 
