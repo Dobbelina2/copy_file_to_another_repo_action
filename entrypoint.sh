@@ -67,7 +67,8 @@ if [ -z "$INPUT_COMMIT_MESSAGE" ]; then
 fi
 
 echo "Adding git commit"
-cd "$DEST_COPY"  # Move to the destination folder within the cloned repository
+cd "$CLONE_DIR"  # Move to the cloned repository directory
+cd "$INPUT_DESTINATION_FOLDER"  # Move to the destination folder within the cloned repository
 git add .
 if git status | grep -q "Changes to be committed"; then
   git commit --message "$INPUT_COMMIT_MESSAGE"
@@ -76,3 +77,4 @@ if git status | grep -q "Changes to be committed"; then
 else
   echo "No changes detected"
 fi
+
