@@ -13,7 +13,7 @@ if [ -z "$INPUT_GIT_SERVER" ]; then
 fi
 
 if [ -z "$INPUT_DESTINATION_BRANCH" ]; then
-  INPUT_DESTINATION_BRANCH="main"
+  INPUT_DESTINATION_BRANCH=main
 fi
 OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH"
 
@@ -27,7 +27,7 @@ git clone --single-branch --branch "$INPUT_DESTINATION_BRANCH" "https://x-access
 if [ -n "$INPUT_DESTINATION_FOLDER" ]; then
   DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 else
-  DEST_COPY="$CLONE_DIR"
+  DEST_COPY="$CLONE_DIR/"
 fi
 
 echo "Copying contents to git repo"
@@ -67,11 +67,11 @@ if [ -z "$INPUT_COMMIT_MESSAGE" ]; then
 fi
 
 echo "Adding git commit"
-git -C "$CLONE_DIR" add .
-if git -C "$CLONE_DIR" status | grep -q "Changes to be committed"; then
-  git -C "$CLONE_DIR" commit --message "$INPUT_COMMIT_MESSAGE"
+git add .
+if git status | grep -q "Changes to be committed"; then
+  git commit --message "$INPUT_COMMIT_MESSAGE"
   echo "Pushing git commit"
-  git -C "$CLONE_DIR" push -u origin HEAD:"$OUTPUT_BRANCH"
+  git push -u origin HEAD:"$OUTPUT_BRANCH"
 else
   echo "No changes detected"
 fi
