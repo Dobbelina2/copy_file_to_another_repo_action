@@ -28,19 +28,14 @@ echo "Checking contents of the clone directory"
 cd "$CLONE_DIR"
 ls -la
 
-if [ ! -z "$INPUT_RENAME" ]; then
-  echo "Setting new filename: ${INPUT_RENAME}"
-  DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER/$INPUT_RENAME"
-else
-  DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
-fi
-
+DEST_COPY="$CLONE_DIR"
+ 
 echo "Copying contents to git repo"
 if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
   echo "Deleting existing files"
-  rm -rf "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
+  rm -rf "$DEST_COPY"
 fi
-mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
+mkdir -p "$DEST_COPY"
 
 if [ "$INPUT_USE_RSYNC" = "true" ]; then
   COPY_COMMAND="rsync -avrh"
