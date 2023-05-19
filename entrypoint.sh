@@ -26,6 +26,7 @@ git clone --single-branch --branch $INPUT_DESTINATION_BRANCH "https://x-access-t
 
 if [ -z "$INPUT_DESTINATION_FOLDER" ]; then
   DEST_COPY="$CLONE_DIR"
+  mv "$CLONE_DIR/$INPUT_DESTINATION_FOLDER" "$CLONE_DIR/source_folder"
 else
   DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 fi
