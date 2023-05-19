@@ -25,7 +25,7 @@ git config --global user.name "$INPUT_USER_NAME"
 git clone --single-branch --branch "$INPUT_DESTINATION_BRANCH" "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
 if [ -n "$INPUT_DESTINATION_FOLDER" ]; then
-  DEST_COPY="$CLONE_DIR/"
+  DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 else
   DEST_COPY="$CLONE_DIR/"
 fi
