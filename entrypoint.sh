@@ -51,10 +51,10 @@ IFS=','
 for SOURCE_FILE in $INPUT_SOURCE_FILE; do
   if [ -d "$SOURCE_FILE" ]; then
     find "$SOURCE_FILE" -type d -exec sh -c "mkdir -p \"$DEST_COPY/{}\"" \;
-    find "$SOURCE_FILE" -type f -exec sh -c "cd $(dirname {}); $COPY_COMMAND $(basename {}) \"$DEST_COPY/{}\"" \;
+    find "$SOURCE_FILE" -type f -exec sh -c "cd \"$PWD\"; $COPY_COMMAND \"$PWD/{}\" \"$DEST_COPY/{}\"" \;
   else
     FILENAME=$(basename "$SOURCE_FILE")
-    sh -c "cd $(dirname $SOURCE_FILE); $COPY_COMMAND $(basename $SOURCE_FILE) \"$DEST_COPY/$FILENAME\""
+    sh -c "cd \"$PWD\"; $COPY_COMMAND \"$PWD/$SOURCE_FILE\" \"$DEST_COPY/$FILENAME\""
   fi
 done
 
