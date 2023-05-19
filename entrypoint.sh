@@ -67,7 +67,7 @@ if [ -z "$INPUT_COMMIT_MESSAGE" ]; then
 fi
 
 echo "Adding git commit"
-cd "$CLONE_DIR"  # Move to the root of the cloned repository
+cd "$DEST_COPY"  # Move to the destination folder within the cloned repository
 git add .
 if git status | grep -q "Changes to be committed"; then
   git commit --message "$INPUT_COMMIT_MESSAGE"
