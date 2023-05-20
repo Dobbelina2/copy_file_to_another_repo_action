@@ -38,9 +38,9 @@ if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
 fi
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 
-# while loop for multiple source files
-IFS=','
-echo "$INPUT_SOURCE_FILE" | tr ' ' '\n' | while IFS= read -r SOURCE_FILE; do
+IFS=',' read -r -a SOURCE_FILES <<< "$INPUT_SOURCE_FILE"
+for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
+  SOURCE_FILE=$(echo "$SOURCE_FILE" | sed "s/^'//;s/'$//")  # Remove leading/trailing single quotes if present
   SOURCE_FILE=$(echo "$SOURCE_FILE" | sed 's/^ *//;s/ *$//')  # Trim leading/trailing whitespace
   if [ -d "$SOURCE_FILE" ]; then
     cp -R "$SOURCE_FILE"/* "$DEST_COPY"
