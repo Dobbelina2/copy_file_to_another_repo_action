@@ -38,14 +38,16 @@ if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
 fi
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 
-IFS=, echo "$INPUT_SOURCE_FILE" | while IFS= read -r SOURCE_FILE; do
-  SOURCE_FILE=$(eval echo "$SOURCE_FILE")  # Evaluate variable expansion
+IFS=, read -ra SOURCE_FILES <<< "$(echo "$INPUT_SOURCE_FILE" | tr -d ' ')"
+for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
+  SOURCE_FILE=$(echo "$SOURCE_FILE" | tr -d "'")
   if [ -d "$SOURCE_FILE" ]; then
     cp -R "$SOURCE_FILE"/* "$DEST_COPY"
   else
     cp -R "$SOURCE_FILE" "$DEST_COPY"
   fi
 done
+
 
 
 
