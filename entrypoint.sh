@@ -38,15 +38,13 @@ if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
 fi
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 
-# while loop for multiple source files
-SOURCE_FILES="$INPUT_SOURCE_FILE"
-echo "$SOURCE_FILES" | tr ',' '\n' | while read -r SOURCE_FILE; do
+echo "$INPUT_SOURCE_FILE" | xargs -d ',' -I {} sh -c '
+  SOURCE_FILE=$(echo "{}" | xargs)  # Trim leading/trailing whitespace
   if [ -d "$SOURCE_FILE" ]; then
     cp -R "$SOURCE_FILE"/* "$DEST_COPY"
   else
     cp -R "$SOURCE_FILE" "$DEST_COPY"
   fi
-done
 
 
 
