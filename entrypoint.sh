@@ -49,6 +49,7 @@ for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
   fi
 done
 
+
 cd "$CLONE_DIR"
 
 if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
