@@ -52,6 +52,7 @@ done
 
 
 
+
 cd "$CLONE_DIR"
 
 if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
