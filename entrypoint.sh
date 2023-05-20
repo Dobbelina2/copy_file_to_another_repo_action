@@ -22,33 +22,30 @@ CLONE_DIR=$(mktemp -d)
 echo "Cloning destination git repository"
 git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
-git clone --single-branch --branch "$INPUT_DESTINATION_BRANCH" "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
+git clone --single-branch --branch $INPUT_DESTINATION_BRANCH "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
-if [ -n "$INPUT_DESTINATION_FOLDER" ]; then
-  DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
+if [ ! -z "$INPUT_RENAME" ]; then
+  echo "Setting new filename: ${INPUT_RENAME}"
+  DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER/$INPUT_RENAME"
 else
-  DEST_COPY="$CLONE_DIR/"
+  DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 fi
 
 echo "Copying contents to git repo"
 if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
   echo "Deleting existing files"
-  rm -rf "$DEST_COPY"
+  rm -rf $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 fi
-mkdir -p "$DEST_COPY"
+mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 
-if [ "$INPUT_USE_RSYNC" = "true" ]; then
-  COPY_COMMAND="rsync -avrh"
-else
-  COPY_COMMAND="cp -R"
-fi
-
+# while loop for multiple source files
 IFS=','
-for SOURCE_FILE in $INPUT_SOURCE_FILE; do
+echo "$INPUT_SOURCE_FILE" | tr ' ' '\n' | while IFS= read -r SOURCE_FILE; do
+  SOURCE_FILE=$(echo "$SOURCE_FILE" | sed 's/^ *//;s/ *$//')  # Trim leading/trailing whitespace
   if [ -d "$SOURCE_FILE" ]; then
     cp -R "$SOURCE_FILE"/* "$DEST_COPY"
   else
-   cp -R "$SOURCE_FILE" "$DEST_COPY"
+    cp -R "$SOURCE_FILE" "$DEST_COPY"
   fi
 done
 
