@@ -40,17 +40,21 @@ mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
 
 SOURCE_FILES=$(echo "$INPUT_SOURCE_FILE" | tr ',' '\n')
 
+IFS=','
+SOURCE_FILES="$INPUT_SOURCE_FILE"
+
+# Iterate over source files
 for SOURCE_FILE in $SOURCE_FILES; do
-  SOURCE_FILE=$(echo "$SOURCE_FILE" | xargs)  # Trim leading/trailing whitespace
+  # Trim leading/trailing whitespace
+  SOURCE_FILE=$(echo "$SOURCE_FILE" | xargs)
+  
+  # Handle source file
   if [ -d "$SOURCE_FILE" ]; then
     cp -R "$SOURCE_FILE"/* "$DEST_COPY"
   else
     cp -R "$SOURCE_FILE" "$DEST_COPY"
   fi
 done
-
-
-
 
 
 cd "$CLONE_DIR"
