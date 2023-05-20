@@ -45,6 +45,8 @@ echo "$INPUT_SOURCE_FILE" | xargs -d ',' -I {} sh -c '
   else
     cp -R "$SOURCE_FILE" "$DEST_COPY"
   fi
+'
+
 
 
 
