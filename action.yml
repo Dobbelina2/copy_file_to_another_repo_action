@@ -45,7 +45,6 @@ runs:
     - ${{ inputs.destination-branch-create }}
     - ${{ inputs.commit-message }}
     - ${{ inputs.git-server }}
-    - ${{ inputs.rename }}
     - ${{ inputs.delete-existing }}
 branding:
   icon: 'git-commit'
