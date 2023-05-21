@@ -26,13 +26,12 @@ git clone --single-branch --branch $INPUT_DESTINATION_BRANCH "https://x-access-t
 
 DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 
-
 echo "Copying contents to git repo"
 if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
   echo "Deleting existing files"
-  rm -rf $CLONE_DIR/$INPUT_DESTINATION_FOLDER
+  rm -rf "$DEST_COPY"
 fi
-mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
+mkdir -p "$DEST_COPY"
 
 SOURCE_FILES=$(echo "$INPUT_SOURCE_FILE" | tr ',' '\n')
 
@@ -51,7 +50,6 @@ for SOURCE_FILE in $SOURCE_FILES; do
     rsync -avrh "$SOURCE_FILE" "$DEST_COPY"
   fi
 done
-
 
 cd "$CLONE_DIR"
 
