@@ -46,9 +46,9 @@ for SOURCE_FILE in $SOURCE_FILES; do
   
   # Handle source file
   if [ -d "$SOURCE_FILE" ]; then
-    cp -R "$SOURCE_FILE"/* "$DEST_COPY"
+    rsync -avrh "$SOURCE_FILE"/* "$DEST_COPY"
   else
-    cp -R "$SOURCE_FILE" "$DEST_COPY"
+    rsync -avrh "$SOURCE_FILE" "$DEST_COPY"
   fi
 done
 
