@@ -25,12 +25,6 @@ inputs:
   commit_message:
     description: 'A custom message for the commit'
     required: false
-  rename:
-    description: 'Rename the destination file'
-    required: false
-  use_rsync:
-    description: 'Copy files/directories using rsync instead of cp. Experimental feature, please know your use case'
-    required: false
   delete_existing:
     description: 'Delete all files in `destination_folder` before copying'
     required: false
@@ -52,7 +46,6 @@ runs:
     - ${{ inputs.commit-message }}
     - ${{ inputs.git-server }}
     - ${{ inputs.rename }}
-    - ${{ inputs.use-rsync }}
     - ${{ inputs.delete-existing }}
 branding:
   icon: 'git-commit'
