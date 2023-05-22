@@ -24,6 +24,7 @@ git config --global http.version HTTP/1.1
 git config --global http.postBuffer 157286400
 git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
+git config --global --add safe.directory $CLONE_DIR
 git clone --single-branch --branch $INPUT_DESTINATION_BRANCH "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
 DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
@@ -67,10 +68,27 @@ fi
 
 echo "Adding git commit"
 git add .
-if git status | grep -q "Changes to be committed"; then
+if git status | grep -q "Changes to be committed"
+then
   git commit --message "$INPUT_COMMIT_MESSAGE"
   echo "Pushing git commit"
-  git push -u origin HEAD:"$OUTPUT_BRANCH"
+  if git push -u origin HEAD:$OUTPUT_BRANCH; then
+    echo "Git push succeeded"
+  elif [ $((INPUT_RETRY_ATTEMPTS)) -gt 0 ]; then
+    echo "Retrying git push"
+    i=0
+    max=$((INPUT_RETRY_ATTEMPTS))
+    while [ $i -lt $max ]
+    do
+      sleep $((1 + $RANDOM % 5))s
+      git fetch
+      git rebase
+      if git push; then
+        exit 0;
+      fi
+    done
+    echo "Can not push changes to $OUTPUT_BRANCH after retrying $INPUT_RETRY_ATTEMPTS attempts"
+  fi
 else
   echo "No changes detected"
 fi
