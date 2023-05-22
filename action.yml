@@ -32,6 +32,10 @@ inputs:
     description: 'Git server host, default github.com'
     required: false
     default: github.com
+  retry_attempts:
+    description: 'Retry attempts if pushing commit failed'
+    required: false
+    default: "10"  
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -46,6 +50,7 @@ runs:
     - ${{ inputs.commit-message }}
     - ${{ inputs.git-server }}
     - ${{ inputs.delete-existing }}
+    - ${{ inputs.retry_attempts }}
 branding:
   icon: 'git-commit'
   color: 'green'
