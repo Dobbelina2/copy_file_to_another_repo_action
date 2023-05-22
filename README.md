@@ -1,13 +1,16 @@
 # copy_file_to_another_repo_action
 This GitHub Action copies files or folders from the current repository to a location in another repository
  ```diff
- + Improved version from @dmnemec with:
+ ! Improved version from @dmnemec with:
  + delete_existing: true [optional] Delete all the existing 
  + files in the destination_folder before copying over
  + the new files.
+ + destination_folder: is mandatory if using this action.
+ 
  + Multiple source files/directories separated by comma
  + "file1.txt,file2.txt" or '"file 1.txt","file 2.txt"'
  + if there are spaces in the file/folder name(s)
+ 
  + Use ${{ github.event.head_commit.message }} to 
  + preserve the original commit message.
  ```
