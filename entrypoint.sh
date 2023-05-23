@@ -19,8 +19,8 @@ OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH"
 
 CLONE_DIR=$(mktemp -d)
 
-#echo "[+] Enable git lfs"
-#git lfs install
+echo "[+] Enable git lfs"
+git lfs install
 
 echo "Cloning destination git repository"
 
