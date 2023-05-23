@@ -20,7 +20,7 @@ OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH"
 CLONE_DIR=$(mktemp -d)
 
 echo "[+] Enable git lfs"
-apt-get install -y git-lfs
+sudo apt-get install -y git-lfs
 git lfs install
 
 echo "Cloning destination git repository"
