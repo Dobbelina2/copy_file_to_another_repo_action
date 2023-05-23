@@ -1,0 +1,20 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - main  # Replace with your branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: ./  # Update the path to the root directory of your repository
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-container .
