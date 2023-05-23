@@ -20,10 +20,11 @@ OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH"
 CLONE_DIR=$(mktemp -d)
 
 echo "[+] Enable git lfs"
+apt-get install -y git-lfs
 git lfs install
 
 echo "Cloning destination git repository"
-apt-get install -y git-lfs
+
 git config --global http.version HTTP/1.1
 git config --global http.postBuffer 157286400
 git config --global user.email "$INPUT_USER_EMAIL"
