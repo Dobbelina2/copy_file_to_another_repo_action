@@ -54,7 +54,7 @@ runs:
     - ${{ inputs.commit-message }}
     - ${{ inputs.git-server }}
     - ${{ inputs.delete-existing }}
-    - ${{ inputs.retry_attempts }}
+    - ${{ inputs.retry-attempts }}
     - ${{ inputs.exclude-files }}
 branding:
   icon: 'git-commit'
