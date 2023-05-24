@@ -1,9 +1,7 @@
 name: Build Docker Image
 
 on:
-  push:
-    branches:
-      - main  # Replace with your branch name
+  workflow_dispatch:
 
 jobs:
   build:
@@ -11,7 +9,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: ./  # Update the path to the root directory of your repository
 
