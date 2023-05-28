@@ -51,13 +51,7 @@ for SOURCE_FILE in $SOURCE_FILES; do
   SOURCE_FILE=$(echo "$SOURCE_FILE" | xargs)
   
   # Handle source file
-  if [ -d "$SOURCE_FILE" ] && [ "${SOURCE_FILE: -1}" != "/" ]; then
-  echo "first statement"
-    rsync -avrh --exclude "$INPUT_EXCLUDE_FILES" "$SOURCE_FILE"/ "$DEST_COPY"
-  else
-  echo "else statement"
-    rsync -avrh --exclude "$INPUT_EXCLUDE_FILES" "$SOURCE_FILE" "$DEST_COPY"
-  fi
+rsync -avrh --exclude "$INPUT_EXCLUDE_FILES" "$SOURCE_FILE" "$DEST_COPY"
 done
 
 cd "$CLONE_DIR"
