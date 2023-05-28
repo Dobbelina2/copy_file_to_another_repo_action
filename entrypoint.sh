@@ -44,7 +44,6 @@ if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
   rm -rf "$DEST_COPY"
 fi
 mkdir -p "$DEST_COPY"
-DEST_COPY="$DEST_COPY"
 echo "Copying contents to git repo"
 SOURCE_FILES=$(echo "$INPUT_SOURCE_FILE" | tr ',' '\n')
 
