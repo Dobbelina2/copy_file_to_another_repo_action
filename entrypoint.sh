@@ -41,7 +41,7 @@ fi
 
 if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
   echo "Deleting existing files"
-  rm -rf "$DEST_COPY"
+  rm -rf "$DEST_COPY"/*
 fi
 mkdir -p "$DEST_COPY"
 echo "Copying contents to git repo"
