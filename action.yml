@@ -38,7 +38,7 @@ inputs:
     default: "10"  
   rsync_option:
     description: 'switches for rsync.'
-    default: '-avrh --delete'
+    default: '-avrh'
     required: false    
 runs:
   using: 'docker'
