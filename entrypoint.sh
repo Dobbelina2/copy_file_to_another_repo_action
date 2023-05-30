@@ -56,7 +56,7 @@ for SOURCE_FILE in $SOURCE_FILES; do
   SOURCE_FILE=$(echo "$SOURCE_FILE" | xargs)
   
   # Handle source file
-rsync -avrh --exclude "$INPUT_EXCLUDE_FILES" "$SOURCE_FILE" "$DEST_COPY"
+rsync -avrh --delete "$SOURCE_FILE" "$DEST_COPY"
 done
 
 cd "$CLONE_DIR"
