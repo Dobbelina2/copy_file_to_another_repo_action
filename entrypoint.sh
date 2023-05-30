@@ -56,7 +56,7 @@ for SOURCE_FILE in $SOURCE_FILES; do
   SOURCE_FILE=$(echo "$SOURCE_FILE" | xargs)
   
   # Handle source file
-rsync "$INPUT_RSYNC_OPTION" "$SOURCE_FILE" "$DEST_COPY"
+rsync $INPUT_RSYNC_OPTION "$SOURCE_FILE" "$DEST_COPY"
 done
 
 cd "$CLONE_DIR"
