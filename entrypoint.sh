@@ -56,10 +56,10 @@ for SOURCE_FILE in $SOURCE_FILES; do
   SOURCE_FILE=$(echo "$SOURCE_FILE" | xargs)
   
 # Get the rsync options from action.yml
-RSYNC_OPTION=$INPUT_RSYNC_OPTION
+#RSYNC_OPTION=$INPUT_RSYNC_OPTION
 
 # Use eval to evaluate the rsync options as a command line argument
-eval "rsync $RSYNC_OPTION \"$SOURCE_FILE\" \"$DEST_COPY\""
+eval "rsync $INPUT_RSYNC_OPTION \"$SOURCE_FILE\" \"$DEST_COPY\""
 done
 
 cd "$CLONE_DIR"
