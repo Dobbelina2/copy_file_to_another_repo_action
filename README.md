@@ -6,7 +6,8 @@ This GitHub Action copies files or folders from the current repository to a loca
  + using the rsync_option: [optional] makes it very versatile
  + with lots of configuration settings, see RSYNC.MD that gives
  + a short tutorial + examples.
- + If rsync_option: is not used it defaults to '-avrh' 
+ + If rsync_option: is not used it defaults to '-avrh'
+ ! Use with caution!, test with –dry-run before actual commit.
  
  + Multiple source files/directories separated by comma
  + "file1.txt,file2.txt" or '"file 1.txt","file 2.txt"'
