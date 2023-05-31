@@ -6,7 +6,7 @@ This GitHub Action copies files or folders from the current repository to a loca
  + The rsync_option: [optional] makes it very versatile
  + with many configuration settings possible. 
  + See RSYNC.MD that gives a short tutorial + examples.
- + If rsync_option: is not used it defaults to '-avrh'
+ + If rsync_option: is not used it defaults to "-avrh"
  ! Use with caution!, test with –dry-run before actual commit.
  
  + Multiple source files/directories separated by comma
@@ -61,7 +61,7 @@ access to only choosen repositories, You need Actions & Contents set to **Access
 * destination_branch_create: [optional] A branch to be created with this commit, defaults to commiting in `destination_branch`
 * commit_message: [optional] A custom commit message for the commit. Defaults to `Update from https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}` 
  use `${{ github.event.head_commit.message }}` to preserve the original commit message.
-* rsync_option: [optional] Full access to rsync's switches, if not used it defaults to '-avrh'
+* rsync_option: [optional] Full access to rsync's switches, if not used it defaults to "-avrh"
 * retry_attempts: [optional] Retry attempts if pushing commit failed, if not used it defaults to 10
 * git_server: [optional] Git server host, default github.com
 
