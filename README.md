@@ -38,7 +38,7 @@ jobs:
         with:
           source_file: "My_Folder/,Another_Folder/test.txt"
           destination_repo: "dmnemec/release-test"
-          destination_folder: "test-dir"
+          destination_folder: "test-dir" # Omit if destination root
           user_email: "example@email.com"
           user_name: "dmnemec"
           commit_message: ${{ github.event.head_commit.message }}
