@@ -17,18 +17,18 @@ This GitHub Action copies files or folders from the current repository to a loca
  ```
 # Example Workflow
 ```yml
-name: Push File
+name: Push Files
 
 on: push
 
 jobs:
-  copy-file:
+  copy-files:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Pushes test file
+      - name: Pushes test folder & file
         uses: dobbelina/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
