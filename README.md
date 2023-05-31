@@ -2,8 +2,8 @@
 This GitHub Action copies files or folders from the current repository to a location in another repository
  ```diff
    Inspiration from @dmnemec
- + Uses rsync exclusively with full access to it's switches,
- + using the rsync_option: [optional] makes it very versatile
+ + Uses rsync exclusively with full access to it's switches.
+ + The rsync_option: [optional] makes it very versatile
  + with lots of configuration settings possible. 
  + See RSYNC.MD that gives a short tutorial + examples.
  + If rsync_option: is not used it defaults to '-avrh'
