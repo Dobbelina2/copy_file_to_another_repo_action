@@ -4,7 +4,7 @@ This GitHub Action copies files or folders from the current repository to a loca
    Improved version from @dmnemec
  + Uses rsync exclusively with full access to it's switches,
  + using the rsync_option: [optional] makes it very versatile
- + with  lots of configuration settings, see RSYNC.MD that gives
+ + with lots of configuration settings, see RSYNC.MD that gives
  + a short tutorial + examples.
  + If rsync_option: is not used it defaults to '-avrh' 
  
