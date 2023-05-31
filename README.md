@@ -14,6 +14,8 @@ This GitHub Action copies files or folders from the current repository to a loca
  
  + Use ${{ github.event.head_commit.message }} to 
  + preserve the original commit message.
+ 
+ + git-lfs support.
  ```
 # Example Workflow
 ```yml
