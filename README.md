@@ -1,7 +1,7 @@
 # copy_file_to_another_repo_action
 This GitHub Action copies files or folders from the current repository to a location in another repository
  ```diff
-   Improved version from @dmnemec
+   Inspiration from @dmnemec
  + Uses rsync exclusively with full access to it's switches,
  + using the rsync_option: [optional] makes it very versatile
  + with lots of configuration settings, see RSYNC.MD that gives
