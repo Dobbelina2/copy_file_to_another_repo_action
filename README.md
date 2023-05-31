@@ -1,11 +1,12 @@
 # copy_file_to_another_repo_action
 This GitHub Action copies files or folders from the current repository to a location in another repository
  ```diff
- ! Improved version from @dmnemec with:
- + delete_existing: true [optional] Delete all the existing 
- + files in the destination_folder before copying over
- + the new files.
- + destination_folder: is mandatory if using this action.
+   Improved version from @dmnemec with:
+ + Uses rsync exclusively with full access to it's switches,
+ + using the rsync_option: [optional] makes it very versatile
+ + with  lots of configuration settings, see RSYNC.MD that gives
+ + a short tutorial + examples.
+ + If rsync_option: is not used it defaults to '-avrh' 
  
  + Multiple source files/directories separated by comma
  + "file1.txt,file2.txt" or '"file 1.txt","file 2.txt"'
@@ -32,13 +33,15 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source_file: "test2.md"
+          source_file: "My_Folder/,Another_Folder/test.txt"
           destination_repo: "dmnemec/release-test"
           destination_folder: "test-dir"
           user_email: "example@email.com"
           user_name: "dmnemec"
           commit_message: ${{ github.event.head_commit.message }}
-          delete_existing: true
+          rsync_option: "-avrh --delete" # Deletes any files in the 
+                                         # destination that is not
+                                         # present in the source 
  ```
 # Variables
 
@@ -54,8 +57,9 @@ The `API_TOKEN_GITHUB` needs to be set in the `Secrets` section of your reposito
 * destination_branch_create: [optional] A branch to be created with this commit, defaults to commiting in `destination_branch`
 * commit_message: [optional] A custom commit message for the commit. Defaults to `Update from https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}` 
  use `${{ github.event.head_commit.message }}` to preserve the original commit message.
-* delete_existing: true [optional] Delete all the existing files in the `destination_folder` before copying over the new files.
-  destination_folder: is mandatory if using this action.
+* rsync_option: [optional] Full access to rsync's switches, if not used it defaults to '-avrh'
+* retry_attempts: [optional] Retry attempts if pushing commit failed, if not used it defaults to 10
+* git_server: [optional] Git server host, default github.com
 
 # Behavior Notes
 The action will create any destination paths if they don't exist. It will also overwrite existing files if they already exist in the locations being copied to. It will not delete the entire destination repository.
