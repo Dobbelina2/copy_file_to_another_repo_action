@@ -42,7 +42,8 @@ jobs:
  ```
 # Variables
 
-The `API_TOKEN_GITHUB` needs to be set in the `Secrets` section of your repository options. You can retrieve the `API_TOKEN_GITHUB` [here](https://github.com/settings/tokens) (set the `repo` permissions).
+The `API_TOKEN_GITHUB` needs to be set in the `Secrets` section of your repository options. You can retrieve the `API_TOKEN_GITHUB` [here](https://github.com/settings/tokens) (set the `repo` permissions). Fine-grained personal access tokens are much more secure as you can set
+access to only choosen repositories, You need Actions & Contents set to **Access: Read and write** & Metadata **Access: Read-only**
 
 * source_file: The file(s) or directory/directories to be moved. Uses the same syntax as the `rsync` command. Include the path for any files not in the repositories root directory. Multiple source files/directories separated by comma 
 `"file1.txt,file2.txt"` or `'"file 1.txt","file 2.txt"'` if there are spaces in the file/folder name(s)
