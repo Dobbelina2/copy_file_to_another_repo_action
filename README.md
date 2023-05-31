@@ -37,10 +37,10 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: "My_Folder/,Another_Folder/test.txt"
-          destination_repo: "dmnemec/release-test"
+          destination_repo: "dobbelina/release-test"
           destination_folder: "test-dir" # Omit if destination root
           user_email: "example@email.com"
-          user_name: "dmnemec"
+          user_name: "dobbelina"
           commit_message: ${{ github.event.head_commit.message }}
           rsync_option: "-avrh --delete" # Deletes any files in the 
                                          # destination that is not
