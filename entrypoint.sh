@@ -39,10 +39,6 @@ else
   DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 fi
 
-if [ "$INPUT_DELETE_EXISTING" = "true" ]; then
-  echo "Deleting existing files"
-  rm -rf "$DEST_COPY"/*
-fi
 mkdir -p "$DEST_COPY"
 echo "Copying contents to git repo"
 SOURCE_FILES=$(echo "$INPUT_SOURCE_FILE" | tr ',' '\n')
