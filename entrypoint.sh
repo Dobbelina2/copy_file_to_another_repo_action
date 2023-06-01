@@ -64,7 +64,7 @@ if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
 fi
 
 if [ -z "$INPUT_COMMIT_MESSAGE" ]; then
-  INPUT_COMMIT_MESSAGE="Update from https://$INPUT_GIT_SERVER/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
+  INPUT_COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
 fi
 
 echo "Adding git commit"
