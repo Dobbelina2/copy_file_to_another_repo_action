@@ -70,6 +70,6 @@ access to only choosen repositories, You need Actions & Contents set to **Access
 [^1]: A `Source_Folder` will copy the folder.  
  A `Source_Folder/` with a trailing slash will only copy the contents of the folder.  
  A `Source_Folder/*` with a trailing slash and an asterisk will only copy the contents   
- of the folder but without any hidden files or subfolders.  
+ of the folder but without any hidden files or hidden subfolders.  
  The asterisk `*` will **expand all files in** `Source_Folder/*` **except the files 
- and subfolders whose name starts with a dot** (hidden files).
+ and subfolders whose name starts with a dot** (hidden files or hidden folders).
