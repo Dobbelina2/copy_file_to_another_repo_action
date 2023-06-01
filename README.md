@@ -17,7 +17,7 @@ This GitHub Action copies files or folders from the current repository to a loca
  
  + git-lfs support.
  ```
- **Important Behavioural Notes of rsync[^1]**.
+ Important **Behavioural Notes** of rsync[^1].
 # Example Workflow
 ```yml
 name: Push Files
