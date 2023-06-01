@@ -18,6 +18,7 @@ This GitHub Action copies files or folders from the current repository to a loca
  
  + git-lfs support.
  ```
+ **Important Behavioural Notes of rsync[^1]**.
 # Example Workflow
 ```yml
 name: Push Files
@@ -65,5 +66,10 @@ access to only choosen repositories, You need Actions & Contents set to **Access
 * retry_attempts: [optional] Retry attempts if pushing commit failed, if not used it defaults to 10
 * git_server: [optional] Git server host, default github.com
 
-# Behavior Notes
-The action will create any destination paths if they don't exist. It will also overwrite existing files if they already exist in the locations being copied to. It will not delete the entire destination repository.
+## Behavioural Notes
+[^1]: A `Source_Folder` will copy the folder.  
+ A `Source_Folder/` with a trailing slash will only copy the contents of the folder.  
+ A `Source_Folder/*` with a trailing slash and an asterisk will only copy the contents   
+ of the folder but without any hidden files or subfolders.  
+ The asterisk `*` will **expand all files in** `Source_Folder/*` **except the files 
+ and subfolders whose name starts with a dot** (hidden files).
