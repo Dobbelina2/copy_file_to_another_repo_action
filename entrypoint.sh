@@ -64,7 +64,7 @@ if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
 fi
 
 if [ -z "$INPUT_COMMIT_MESSAGE" ]; then
-  INPUT_COMMIT_MESSAGE="${ github.event.head_commit.message }"
+  INPUT_COMMIT_MESSAGE="${github.event.head_commit.message}"
 fi
 
 echo "Adding git commit"
